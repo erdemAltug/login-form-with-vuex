@@ -63,7 +63,7 @@
         <v-text-field v-model="userName" label="Name"></v-text-field>
         <v-text-field :rules="emailRules" v-model="email" label="Email"></v-text-field>
         <v-text-field v-model="password" label="Password"></v-text-field>
-        <v-text-field  :rules="phoneRules" v-model="phoneNumber" label="Phone Number"></v-text-field>
+        <v-text-field :rules="phoneRules" v-model="phoneNumber" label="Phone Number"></v-text-field>
         <v-select :items="items" v-model="country" filled label="Countries"></v-select>
         <v-textarea v-model="textArea" filled name="input-7-4" label="Textarea" value="Text"></v-textarea>
         <v-divider></v-divider>
@@ -103,12 +103,12 @@ export default {
   name: "contact",
 
   data: () => ({
-     emailRules: [ 
-        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
-      ],
-       phoneRules: [ 
-        v => /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(v) || 'Phonenumber must be valid'
-      ],
+    emailRules: [
+      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+    ],
+    phoneRules: [
+      v => /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(v) || 'Phonenumber must be valid'
+    ],
     items: ['Turkey', 'United States Of America', 'United Kingdom', 'Germany', 'Sweden', 'Kenya', 'Brazil', 'Zimbabwe'],
     phoneNumber: "",
     pageName: "Contact",
@@ -134,16 +134,23 @@ export default {
     ]),
 
     sendContactInfos() {
-      const params = {
-        title: this.title,
-        email: this.email,
-        username: this.userName,
-        password: this.password,
-        phone: this.phoneNumber,
-        country: this.country,
-        text: this.textArea,
-      };
-      console.log("post", params)
+      if (this.emailRules == true && this.phoneRules == true)  {
+        var params = {
+          title: this.title,
+          email: this.email,
+          username: this.userName,
+          password: this.password,
+          phone: this.phoneNumber,
+          country: this.country,
+          text: this.textArea,
+          
+        };
+      }
+      else alert("Check Email or Phone");
+
+      console.log("post", params);
+
+      
     }
   },
 };
